@@ -1,2 +1,3 @@
 .DS_Store
-riotAPI/node_modules
+node_modules
+riotAPI/.tern-port

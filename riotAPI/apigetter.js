@@ -38,6 +38,10 @@ const RiotAPI = function() {
 		return matchHist;
 	};
 	
+	this.getChampionHistory = function(histList, championId) {
+		return histList.filter(match => (champion === histList['champion']));
+	};
+	
 	this.getMatchInfo = function(gameId, accountId) {
 		let matchInfo = {};
 
