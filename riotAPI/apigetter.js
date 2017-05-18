@@ -59,7 +59,7 @@ const RiotAPI = function() {
 		req.send();
 		
 		let header = req.getResponseHeader("X-Rate-Limit-Count");
-		// console.log(header);
+		console.log(header);
     
 		let res = JSON.parse(req.responseText);
 		let participantIdentities = res['participantIdentities'];
@@ -81,7 +81,7 @@ const RiotAPI = function() {
 		
 		let playerInfo = {};
 		
-		playerInfo['win'] = stats['win'];
+		// playerInfo['win'] = stats['win'];
 		playerInfo['kills'] = stats['kills'];
 		playerInfo['deaths'] = stats['deaths'];
 		playerInfo['assists'] = stats['assists'];
@@ -95,21 +95,35 @@ const RiotAPI = function() {
 	
 	this.getAggregatePLayerChampionData = function(accountId, championId) {
 		let matchHist = this.getMatchHistory(accountId);
+		console.log('matchHist', matchHist);
 		let champHist = this.getChampionHistory(matchHist, championId);
+		console.log('champHist', champHist);
 		let playerInfos = [];
 		
 		champHist.forEach(match => {
-			playerInfos.push(this.getMatchInfo(match));
+			let matchInfo = this.getMatchInfo(match['gameId'], accountId);
+			console.log('matchInfo', matchInfo);
+			playerInfos.push(matchInfo);
 		});
 		
-		let playerSum = [];
-		for (let i = 0; i < champHist.length; i++) {
-			playerSum['kills'] += champHist[i]['kills'];
-			
-		}
-		// console.log(playerSum);
+		playerInfos.reduce((sums, curr) => {
+			return { 'kills': sums['kills'] + curr['kills'], 
+							 'deaths': sums['deaths'] + curr['deaths'],
+							 'assists': sums['assists'] + curr['assists'],
+							 'goldEarned': sums['goldEarned'] + curr['goldEarned'],
+							 'totalMinionsKilled': sums['totalMinionsKilled'] + 
+																			curr['totalMinionsKilled'],
+							 'neutralMinionsKilled': sums['neutralMinionsKilled'] + 
+																				curr['neutralMinionsKilled'],
+							 'wardsPlaced': sums['wardsPlaced'] + curr['wardsPlaced']};
+		}, {'kills': 0, 'deaths': 0, 'assists': 0, 'goldEarned': 0, 'totalMinionsKilled': 0, 
+				'neutralMinionsKilled': 0, 'wardsPlaced': 0});
 		
-		// take find sum over all games on that specific champion
+		for (let value of playerInfos.values()) {
+			values /= matchHist.length;
+		}
+		
+		return playerInfos;
 	};
 	
 	this.generateCSV = function(playerData) {
@@ -120,10 +134,13 @@ const RiotAPI = function() {
 let r = new RiotAPI();
 
 let accountId = r.getAccountID('sonataine');
-console.log('accountId', accountId);
+// console.log('accountId', accountId);
 let matchHist = r.getMatchHistory(accountId);
 let champMatch = r.getChampionHistory(matchHist, 60);
-console.log('champMatch', champMatch);
+// console.log('champMatch', champMatch);
 let match = matchHist[0];
 let pi = r.getMatchInfo(match['gameId'], accountId);
-console.log(pi);
+// console.log(pi);
+
+let aggr = r.getAggregatePLayerChampionData(accountId, 60);
+console.log('aggr', aggr);
