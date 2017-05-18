@@ -9,20 +9,14 @@ const RiotAPI = function() {
 		let req = new XMLHttpRequest();
 		req.open('GET', this.BASE_PATH + 
 			'/lol/summoner/v3/summoners/by-name/' + 
-			summonerName + '?api_key=' + KEY, true);
-		
-		req.onreadystatechange = () => {
-			if (req.readyState == 4 && req.status == 200) {
-				let header = req.getResponseHeader("X-Rate-Limit-Count");
-				console.log('header', header);
-		
-				let res = JSON.parse(req.responseText);
-				// callback(JSON.parse(req.responseText));
-				return res['accountId'];
-			}
-		};
-		
+			summonerName + '?api_key=' + KEY, false);
 		req.send();
+		
+		let header = req.getResponseHeader("X-Rate-Limit-Count");
+		console.log('header', header);
+
+		let res = JSON.parse(req.responseText);
+		return res['accountId'];
 	};
 
 	this.getMatchHistory = function(accountId) {
@@ -40,7 +34,7 @@ const RiotAPI = function() {
 
 		let res = JSON.parse(req.responseText);
 		let matches = res['matches'];
-		console.log('matches', matches);
+		// console.log('matches', matches);
 		
 		for (let i = 0; i < matches.length; i++) {
 			matchHist.push({ 'gameId': matches[i]['gameId'], 
@@ -52,7 +46,7 @@ const RiotAPI = function() {
 	};
 	
 	this.getChampionHistory = function(matchHist, championId) {
-		console.log('matchHist', matchHist);
+		// console.log('matchHist', matchHist);
 		return matchHist.filter(match => (championId === match['champion']));
 	};
 	
@@ -65,7 +59,7 @@ const RiotAPI = function() {
 		req.send();
 		
 		let header = req.getResponseHeader("X-Rate-Limit-Count");
-		console.log(header);
+		// console.log(header);
     
 		let res = JSON.parse(req.responseText);
 		let participantIdentities = res['participantIdentities'];
@@ -113,7 +107,7 @@ const RiotAPI = function() {
 			playerSum['kills'] += champHist[i]['kills'];
 			
 		}
-		console.log(playerSum);
+		// console.log(playerSum);
 		
 		// take find sum over all games on that specific champion
 	};
