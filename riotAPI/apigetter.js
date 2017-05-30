@@ -101,9 +101,12 @@ const RiotAPI = function() {
 		let playerInfos = [];
 		
 		champHist.forEach(match => {
-			let matchInfo = this.getMatchInfo(match['gameId'], accountId);
-			console.log('matchInfo', matchInfo);
-			playerInfos.push(matchInfo);
+			// let matchInfo = this.getMatchInfo(match['gameId'], accountId);
+			setTimeout(() => {
+				let matchInfo = this.getMatchInfo(match['gameId'], accountId);
+				console.log('matchInfo', matchInfo);
+				playerInfos.push(matchInfo);
+			}, 1200);
 		});
 		
 		playerInfos.reduce((sums, curr) => {
@@ -142,5 +145,6 @@ let match = matchHist[0];
 let pi = r.getMatchInfo(match['gameId'], accountId);
 // console.log(pi);
 
+// DONT RUN THIS UNTIL WE HAVE A WAY TO WORK AROUND RATE LIMITS
 let aggr = r.getAggregatePLayerChampionData(accountId, 60);
 console.log('aggr', aggr);
