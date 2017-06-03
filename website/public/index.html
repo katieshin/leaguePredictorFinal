@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    <a href="#game" class="w3-bar-item w3-button w3-hide-small w3-hover-white">The Game</a>
+    <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About Us</a>
+    <a href="#synposis" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Synposis</a>
+    <a href="#methodology" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Methodology</a>
+    <a href="#results" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Results</a>
+  </div>
+</div>
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" style="margin-left:250px">
+  <div class="w3-row" style="margin-top:80px">
+		<img alt="" src="images/lollogo.jpeg">
+	</div>
+	
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal" id="game">About League of Legends</h1>
+			<p>League of Legends is a 5 vs 5 team game with over 130 champions to choose from. The objective of the game is to work together as a team to destroy the opposing team's base. For more information, visit <a href="http://gameinfo.na.leagueoflegends.com/en/game-info/">their website</a>.</p>
+    </div>
+  </div>
+
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal" id="about">About Us</h1>
+      <p>Yunil Seo: yunilseo2016@u.northwestern.edu</p>
+      <p>Katie Shin: katherineshin2018@u.northwestern.edu</p>
+      <p>Ethan Suh: edys@u.northwestern.edu</p>
+			<p>Hi, we are Northwestern University students learning Machine Learning (EECS 349) with Professor Doug Downey. Our task here is to analyze League of Legends data to predict the outcome of a game.</p>
+    </div>
+  </div>
+
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal" id="synposis">Synposis</h1>
+			<p></p>
+      <p>Our task is to predict the win rate of a League of Legends (LoL) team based on its composition of champions (characters). This is an interesting task especially for LoL players because once a win rate is estimated, players can change their strategies or playing styles accordingly. When players are determining their champions, they can discourage or encourage others to take on a certain role to raise their win rate. Because LoL is a rather sophisticated game with a lot of variables, the most crucial part of the project is to determine which attributes are the most relevant to the task. After determining the attributes, we parsed through the riot API, which is the LoL data API, and ran the .arff file through weka to determine which attributes are the most important when determining the win rate, which were organized per champion/player.</p>
+    </div>
+  </div>
+
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal" id="methodology">Methodology</h1>
+      <p>We ran the .arff file through weka, specifically using ZeroR, Naive Bayes, IBk, J48, and Multilayer Perceptron. One of the biggest findings is that the average win rate across the board is approximately 50%. This statistics makes sense because while the highest ranked players have a higher win rate, the lower ranked players have a lower win rate. The classifier that shows most clearly which attribute is the most important is J48 -- since all attributes are categorized into a tree, it is easy to visualize which of them are the biggest classifying attributes. In this case, the number of deaths of player 10 is the biggest indicator of which team will win that specific match. However, the classifiers with the highest accuracy are Naive Bayes and Multilayer Perceptron. This is reasonable because Naive Bayes uses conditional probability which takes into account the likelihood and probability of an attribute happening using priors and posteriors. Multilayer Perceptron uses backpropagation to edit the classified results to make it as accurate as possible, and has multiple activation layers which adds in more complexity to the calculation process.</p>
+    </div>
+  </div>
+	
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal" id="results">Results</h1>
+			<a href="league.arff">Download our arff data</a><br><br>
+			<img alt="" src="images/accuracy.png"></img>
+    </div>
+  </div>
+
+<!-- END MAIN -->
+</div>
+
+</body>
+</html>
