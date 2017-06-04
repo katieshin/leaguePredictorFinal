@@ -21,6 +21,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <a href="#synposis" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Synposis</a>
     <a href="#methodology" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Methodology</a>
     <a href="#results" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Results</a>
+    <a href="#future" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Future</a>
   </div>
 </div>
 
@@ -50,7 +51,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <div class="w3-row">
     <div class="w3-twothird w3-container">
       <h1 class="w3-text-teal" id="synposis">Synposis</h1>
-			<p></p>
       <p>Our task is to predict the win rate of a League of Legends (LoL) team based on its composition of champions (characters). This is an interesting task especially for LoL players because once a win rate is estimated, players can change their strategies or playing styles accordingly. When players are determining their champions, they can discourage or encourage others to take on a certain role to raise their win rate. Because LoL is a rather sophisticated game with a lot of variables, the most crucial part of the project is to determine which attributes are the most relevant to the task. After determining the attributes, we parsed through the riot API, which is the LoL data API, and ran the .arff file through weka to determine which attributes are the most important when determining the win rate, which were organized per champion/player.</p>
     </div>
   </div>
@@ -58,7 +58,18 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <div class="w3-row">
     <div class="w3-twothird w3-container">
       <h1 class="w3-text-teal" id="methodology">Methodology</h1>
-      <p>We ran the .arff file through weka, specifically using ZeroR, Naive Bayes, IBk, J48, and Multilayer Perceptron. One of the biggest findings is that the average win rate across the board is approximately 50%. This statistics makes sense because while the highest ranked players have a higher win rate, the lower ranked players have a lower win rate. The classifier that shows most clearly which attribute is the most important is J48 -- since all attributes are categorized into a tree, it is easy to visualize which of them are the biggest classifying attributes. In this case, the number of deaths of player 10 is the biggest indicator of which team will win that specific match. However, the classifiers with the highest accuracy are Naive Bayes and Multilayer Perceptron. This is reasonable because Naive Bayes uses conditional probability which takes into account the likelihood and probability of an attribute happening using priors and posteriors. Multilayer Perceptron uses backpropagation to edit the classified results to make it as accurate as possible, and has multiple activation layers which adds in more complexity to the calculation process.</p>
+			<p>We ran our data through weka, specifically using ZeroR, Naive Bayes, IBk, J48, and Multilayer Perceptron. One interesting finding is that the average win rate across the board is approximately 50%. This statistics makes sense because while the highest ranked players have a higher win rate, the lower ranked players have a lower win rate. Our task produced meaningful results, in that we were able to achieve high accuracy across various models through our selection of features. Even J48, though the tree splits on feature in illogical ways given knowledge about the game, was able to yield a solid accuracy of 85%.  Furthermore, the classifiers such as Naive Bayes and Multilayer Perceptron were able to produce even better results. This is reasonable because Naive Bayes uses conditional probability which takes into account the likelihood and probability of an attribute happening using priors and posteriors. Multilayer Perceptron uses backpropagation to edit the classified results to make it as accurate as possible, and has multiple activation layers which adds in more complexity to the calculation process.</p>
+			<p>A note about the features we chose: we initially wished to compute the averages statistics of the current champion for each player--the win rate on that champion, average minions killed, average gold earned, etc.--since these values would have offered great insight in each team's’ performance against each other. However, due to the rate limits of the Riot API, we simply used the per game statistics for each of these metrics and were still able to find meaningful results. Here are the statistics we looked at for each player on each team: </p>
+			<ul>
+				<li>champion</li>
+				<li>kills</li>
+				<li>deaths</li>
+				<li>assists</li>
+				<li>gold earned</li>
+				<li>total minions killed</li>
+				<li>neutral minions killed</li>
+				<li>wards placed</li>
+			</ul>
     </div>
   </div>
 	
@@ -69,6 +80,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			<img alt="" src="images/accuracy.png"></img>
     </div>
   </div>
+	
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal" id="future">Future Work</h1>
+      <p>Potential improvements that can be made to this project include more attributes and team data analysis. Because we were having difficulty obtaining data from the API due to the constraint on the number of calls per minute, obtaining the full set of data per match would have taken us weeks to gather 1,000 matches’ worth of data. More time to run our API rate-limited code, or access to the production API key with much higher limits, would have allowed us to gather the exact data we were aiming for. Also it doesn’t matter which player plays which champion, but rather what the team composition is across each team of five players. Therefore, a bit-wise representation of the selected champions for each team might be a more logical process that would have offered different results.</p>
+    </div>
+  </div>
+
 
 <!-- END MAIN -->
 </div>
