@@ -4,6 +4,7 @@ var app = express();
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-app.listen(process.env.port || 9000, () => {
+// app.listen(9000, () => {
+app.listen(process.env.port, () => {
 	console.log("lol predictor static site hosted on port 9000");
 });
